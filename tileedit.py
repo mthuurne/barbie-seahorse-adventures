@@ -573,7 +573,7 @@ def cmd_save(value):
         cfg_to_ini(['tile_w','tile_h','palette'],app.fname)
         ini_save()
         app.dirty = 0
-    except Exception, v:
+    except Exception as v:
         ErrorDialog("Save failed.",v).open()
         return
 
@@ -614,7 +614,7 @@ def _cmd_open(value):
             cfg['tile_w'] = tile_w
             cfg['tile_h'] = tile_h
             ok = 1
-        except Exception,v:
+        except Exception as v:
             ErrorDialog("Open failed.",v).open()
 
         if ok: raise Restart()
@@ -655,7 +655,7 @@ def _cmd_new(value):
             cfg['tile_w'] = tile_w
             cfg['tile_h'] = tile_h
             ok = 1
-        except Exception, v:
+        except Exception as v:
             ErrorDialog("New failed.",v).open()
         if ok:
             raise Restart()

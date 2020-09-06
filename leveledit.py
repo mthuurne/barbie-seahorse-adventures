@@ -760,7 +760,7 @@ def _cmd_new(value):
             cfg['tiles'] = tiles
             cfg['class'] = klass
             ok = 1
-        except Exception, v:
+        except Exception as v:
             ErrorDialog("New failed.",v).open()
         if ok:
             raise Restart()
@@ -794,7 +794,7 @@ def _cmd_open(value):
 
 
             ok = 1
-        except Exception,v:
+        except Exception as v:
             ErrorDialog("Open failed.",v).open()
 
         if ok: raise Restart()
@@ -911,7 +911,7 @@ def cmd_save(value):
         cfg_to_ini(['class','codes','tiles','tile_w','tile_h'],app.fname)
         ini_save()
         app.dirty = 0
-    except Exception, v:
+    except Exception as v:
         ErrorDialog("Save failed.",v).open()
         return
 

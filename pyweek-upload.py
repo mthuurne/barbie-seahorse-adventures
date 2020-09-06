@@ -108,7 +108,7 @@ class progressHTTPConnection(httplib.HTTPConnection):
             pos = 0
             try:
                 pos += self.sock.send(chunk)
-            except socket.error, v:
+            except socket.error as v:
                 if v[0] == 32:      # Broken pipe
                     self.close()
                 raise
@@ -165,7 +165,7 @@ upload your source and check the "Final Submission" checkbox.
 if __name__ == '__main__':
     try:
         optlist, args = getopt.getopt(sys.argv[1:], 'e:u:p:sfd:h:P:c:')
-    except getopt.GetoptError, message:
+    except getopt.GetoptError as message:
         print message
         usage()
         sys.exit(1)
