@@ -1,5 +1,6 @@
 """
 """
+from __future__ import print_function
 import pygame
 
 import style
@@ -80,7 +81,7 @@ class Widget:
         if params['decorate'] != False:
             import app
             if not hasattr(app.App,'app'):
-                print 'gui.widget: creating an App'
+                print('gui.widget: creating an App')
                 app.App.app = app.App()
             app.App.app.theme.decorate(self,params['decorate'])
 

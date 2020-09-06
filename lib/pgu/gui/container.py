@@ -1,5 +1,6 @@
 """
 """
+from __future__ import print_function
 import pygame
 from pygame.locals import *
 
@@ -88,8 +89,8 @@ class Container(widget.Widget):
                 sub = surface.subsurface(s,w.rect)
                 ok = True
             except:
-                print 'container.paint(): %s not in %s'%(w.__class__.__name__,self.__class__.__name__)
-                print s.get_width(),s.get_height(),w.rect
+                print('container.paint(): %s not in %s'%(w.__class__.__name__,self.__class__.__name__))
+                print(s.get_width(),s.get_height(),w.rect)
                 ok = False
             if ok:
                 if not (hasattr(w,'_container_bkgr') and w._container_bkgr.get_width() == sub.get_width() and w._container_bkgr.get_height() == sub.get_height()):

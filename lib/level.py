@@ -1,5 +1,6 @@
 # this file is licensed under the LGPL
 
+from __future__ import print_function
 import os
 
 import pygame
@@ -350,7 +351,7 @@ class Level:
                         s.deinit(self, s)
                     if hasattr(s, '_code'):
                         if s._code not in self.codes:
-                            print 'error in code GC', s._code
+                            print('error in code GC', s._code)
                             continue
                         del self.codes[s._code]
 

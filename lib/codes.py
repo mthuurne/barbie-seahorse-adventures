@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pygame
 from pygame.locals import *
 
@@ -109,7 +110,7 @@ CODES = {
 def c_init(g, pos, n):
     x, y = pos
     if n not in INIT_CODES and n not in CODES:
-        print 'undefined code:', x, y, '0x%2x' % n
+        print('undefined code:', x, y, '0x%2x' % n)
         return
     if n not in INIT_CODES:
         return
@@ -120,7 +121,7 @@ def c_init(g, pos, n):
 def c_run(g, pos, n):
     x, y = pos
     if n not in INIT_CODES and n not in CODES:
-        print 'undefined code:', x, y, '0x%2x' % n
+        print('undefined code:', x, y, '0x%2x' % n)
         return
     if n not in CODES:
         return

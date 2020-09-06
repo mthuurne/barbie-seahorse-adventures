@@ -3,6 +3,7 @@ Upload script specifically engineered for the PyWeek challenge.
 
 Handles authentication and gives upload progress feedback.
 '''
+from __future__ import print_function
 import sys, os, httplib, cStringIO, socket, time, getopt
 
 class Upload:
@@ -55,7 +56,7 @@ class Progress:
     def next(self):
         self.num += 1
         if self.sent >= self.tosend:
-            print self.info, 'done', ' '*(75-len(self.info)-6)
+            print(self.info, 'done', ' '*(75-len(self.info)-6))
             sys.stdout.flush()
             raise StopIteration
 
@@ -137,11 +138,11 @@ def http_request(data, server, port, url):
     response = f.read().strip()
     f.close()
 
-    print '%s %s'%(errcode, errmsg)
-    if response: print response
+    print('%s %s'%(errcode, errmsg))
+    if response: print(response)
 
 def usage():
-    print '''This program is to be used to upload files to the PyWeek system.
+    print('''This program is to be used to upload files to the PyWeek system.
 You may use it to upload screenshots or code submissions.
 
 REQUIRED ARGUMENTS:
@@ -159,14 +160,14 @@ OPTIONAL ARGUMENTS:
 
 In order to qualify for judging at the end of the challenge, you MUST
 upload your source and check the "Final Submission" checkbox.
-'''
+''')
 
 
 if __name__ == '__main__':
     try:
         optlist, args = getopt.getopt(sys.argv[1:], 'e:u:p:sfd:h:P:c:')
     except getopt.GetoptError as message:
-        print message
+        print(message)
         usage()
         sys.exit(1)
     host = 'www.pyweek.org'
@@ -186,7 +187,7 @@ if __name__ == '__main__':
         elif opt == '-P': port = int(arg)
 
     if len(data) < 4 or url is None:
-        print 'Required argument missing'
+        print('Required argument missing')
         usage()
         sys.exit(1)
 

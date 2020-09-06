@@ -65,6 +65,7 @@ return - toggle fullscreen
 </pre>
 """
 
+from __future__ import print_function
 import os,sys
 from optparse import OptionParser
 from ConfigParser import ConfigParser
@@ -710,7 +711,7 @@ def cmd_copy(value):
     #app.clipboard.fill((0,0,0,0))
     #app.clipboard.blit(s,(0,0))
 
-    print app.clipboard.get_at((0,0))
+    print(app.clipboard.get_at((0,0)))
 
 def cmd_paste(value):
     if app.clipboard != None:
@@ -924,7 +925,7 @@ def cmd_preview(value):
     # this should work instead:
     if sys.platform.lower() == 'win32':
 	cmd = "preview.py _preview.tga"
-    print cmd
+    print(cmd)
     os.system(cmd)
 
 def cmd_quit(value):

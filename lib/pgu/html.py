@@ -1,5 +1,6 @@
 """a html renderer
 """
+from __future__ import print_function
 import htmllib
 import re
 import pygame
@@ -378,7 +379,7 @@ class _html(htmllib.HTMLParser):
         r = self.attrs_to_map(attrs)
         params = self.map_to_params(r)
         params['style']['padding'] = h
-        print params
+        print(params)
 
         self.item.block(0)
         self.item.add(_hr(**params))
@@ -408,7 +409,7 @@ class _html(htmllib.HTMLParser):
             else:
                 self.item.add(w)
         except:
-            print 'handle_image: missing %s'%src
+            print('handle_image: missing %s'%src)
 
     def handle_data(self,txt):
         if self.type == 'table': return

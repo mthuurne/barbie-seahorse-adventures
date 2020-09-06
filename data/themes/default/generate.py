@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pygame
 from pygame.locals import *
 pygame.display.init()
@@ -76,7 +77,7 @@ todo = [
     ]
 
 for fname,img,over,ww,hh,s in todo:
-    print fname
+    print(fname)
     img,w,h = prep(img)
     out = pygame.Surface((ww*w,hh*h),SWSURFACE|SRCALPHA,32)
     out.fill((0,0,0,0))

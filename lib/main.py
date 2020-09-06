@@ -6,6 +6,7 @@ Feel free to put all your game code here, or in other modules in this "lib"
 directory.
 '''
 
+from __future__ import print_function
 import sys
 import os
 
@@ -138,7 +139,7 @@ class Game(engine.Game):
 
             pygame.mixer.init()
         except:
-            print 'mixer not initialized'
+            print('mixer not initialized')
 
         self._music_name = None
 
@@ -151,7 +152,7 @@ class Game(engine.Game):
         if not self.vsync:
             r = self.timer.tick()
             if r is not None:
-                print r
+                print(r)
 
     def flip(self):
         if not self.lowres:

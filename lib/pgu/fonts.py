@@ -4,7 +4,9 @@
 future versions of pgu!</p>
 """
 
-print 'pgu.fonts','This module is alpha, and is subject to change.'
+from __future__ import print_function
+
+print('pgu.fonts','This module is alpha, and is subject to change.')
 
 import pygame
 from pygame.locals import *

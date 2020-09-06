@@ -13,14 +13,15 @@ The script ignores:
 
 '''
 
+from __future__ import print_function
 import sys
 import os
 import zipfile
 
 if len(sys.argv) != 2:
-    print '''Usage: python %s <release filename-version>
+    print('''Usage: python %s <release filename-version>
 
-eg. python %s my_cool_game-1.0'''%(sys.argv[0], sys.argv[0])
+eg. python %s my_cool_game-1.0'''%(sys.argv[0], sys.argv[0]))
     sys.exit()
 
 base = sys.argv[1]

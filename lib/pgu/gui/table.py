@@ -1,5 +1,6 @@
 """
 """
+from __future__ import print_function
 from const import *
 import container
 
@@ -45,7 +46,7 @@ class Table(container.Container):
 
     def remove_row(self, n): #NOTE: won't work in all cases.
         if n >= self.getRows():
-            print "Trying to remove a nonexistant row:", n, "there are only", self.getRows(), "rows"
+            print("Trying to remove a nonexistant row:", n, "there are only", self.getRows(), "rows")
             return
 
         for cell in self._rows[n]:
