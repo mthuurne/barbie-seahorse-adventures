@@ -7,10 +7,10 @@ def subsurface(s,r):
 
     <pre>subsurface(s,r): return surface</pre>
     """
+    w,h = s.get_width(),s.get_height()
     r = pygame.Rect(r)
     if r.x < 0 or r.y < 0:
-        raise "gui.subsurface: %d %d %s"%(s.get_width(),s.get_height(),r)
-    w,h = s.get_width(),s.get_height()
+        raise ValueError("Negative offset for subsurface rectangle: %d %d %s" % (w,h,r))
     if r.right > w:
         r.w -= r.right-w
     if r.bottom > h:
