@@ -41,7 +41,7 @@ class RenderCache:
 
     def end_frame(self):
         new_renders = {}
-        for key, value in self.renders.iteritems():
+        for key, value in self.renders.items():
             if value[1]:
                 new_renders[key] = [value[0], False]  # not used in next frame
         self.deletions += len(self.renders) - len(new_renders)

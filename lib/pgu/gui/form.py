@@ -73,7 +73,7 @@ class Form(widget.Widget):
 
         <pre>Form.items(): return list</pre>
         """
-        return self.results().items()
+        return list(self.results().items())
 
     #def start(self):
     #    Object.start(self,-1)
