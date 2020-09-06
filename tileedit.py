@@ -1108,13 +1108,14 @@ def main():
     init_opts()
     init_gui()
 
-    restart = 1
+    restart = True
     while restart:
-        restart = 0
+        restart = False
         try:
             init_app()
             run()
-        except Restart: restart = 1
+        except Restart:
+            restart = True
 
 
 

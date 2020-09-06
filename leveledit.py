@@ -1379,13 +1379,14 @@ def main():
     init_opts()
     init_gui()
 
-    restart = 1
+    restart = True
     while restart:
-        restart = 0
+        restart = False
         try:
             init_app()
             run()
-        except Restart: restart = 1
+        except Restart:
+            restart = True
 
 main()
 # vim: set filetype=python sts=4 sw=4 noet si :
