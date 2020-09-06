@@ -1,5 +1,5 @@
 ** POST DELUXE BUGS **
-  
+
 
 
 - in pekuja_1 in the secrect coin room at the bottom right corner
@@ -22,7 +22,7 @@
     go to part 2 w/o the boss
 - make pandas killable with like 100 shots
     and if you kill one, you go to a secret level
-- fix Tee's level - no win 
+- fix Tee's level - no win
 - add clear "Exit" signs to the end of levels
 - overworld map ??
 - every n points get the big hair
@@ -36,25 +36,25 @@
 Everyone:
     - create levels, level testing, etc etc
 
-DrPetter: 
+DrPetter:
     - backgrounds for volcano and moon zones
     - sound effects for everything!! :)
-    
+
 philhassey:
     - menus
     - pause, quit and other niceties
     - some levels, level testing
-    
+
 trick:
     - a couple more volcano enemies
     - a couple more moon enemies
     - a final boss?
-     
+
 pekuja:
     - code for new enemies created
     - all round coding
     - mini-games?  cut-scenes? (totally optional)
-    
+
 timinge:
     - finish music
 

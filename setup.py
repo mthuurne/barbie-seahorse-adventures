@@ -7,19 +7,19 @@ cfg = {
     'author':'The Olde Battleaxe',
     'author_email':'philhassey@yahoo.com',
     'url':'http://www.imitationpickles.org/barbie/',
-    
+
     'py2exe.target':'barbie',
     'py2exe.icon':'icon.ico', #64x64
     'py2exe.binary':'barbie', #leave off the .exe, it will be added
-    
+
     'py2app.target':'Barbie Seahorse Adventures',
     'py2app.icon':'icon.icns', #128x128
-    
+
     'cx_freeze.cmd':'~/src/cx_Freeze-3.0.3/FreezePython',
     'cx_freeze.target':'barbie',
     'cx_freeze.binary':'barbie',
     }
-    
+
 # usage: python setup.py command
 #
 # sdist - build a source dist
@@ -72,7 +72,7 @@ if cmd == 'sdist':
     for l in data: f.write("include "+l+"\n")
     for l in src: f.write("include "+l+"\n")
     f.close()
-    
+
     setup(
         name=cfg['name'],
         version=cfg['version'],
@@ -86,11 +86,11 @@ if cmd == 'sdist':
 if cmd in ('py2exe',):
     dist_dir = os.path.join('dist',cfg['py2exe.target'])
     data_dir = dist_dir
-    
+
     src = 'run_game.py'
     dest = cfg['py2exe.binary']+'.py'
     shutil.copy(src,dest)
-    
+
     setup(
         options={'py2exe':{
             'dist_dir':dist_dir,
@@ -141,7 +141,7 @@ def make_dirs(dname_):
         if not os.path.isdir(dname):
             os.mkdir(dname)
 
-# copy data into the binaries 
+# copy data into the binaries
 if cmd in ('py2exe','cx_freeze','py2app'):
     dest = data_dir
     for fname in data:

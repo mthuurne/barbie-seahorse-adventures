@@ -1,6 +1,6 @@
 desktop background desktop.png
 
-input font Vera.ttf 16 
+input font Vera.ttf 16
 input background input.normal.png
 input color #000000
 input:focus background input.focus.png

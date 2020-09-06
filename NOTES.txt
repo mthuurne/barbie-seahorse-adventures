@@ -8,25 +8,25 @@ N J T P
   + + + tim_2.tga             easy/med   jungle
   + + + phil_2.tga            easy/med   jungle
   ? + + phil_13.tga           med/hard   jungle
-  
+
 ? + +   pekuja_3              medium     volcano
   + + + tim_4                 medium     volcano
   ? ? + phil_14.tga           med/hard   volcano
   + + + phil_8.tga            easy       volcano-bonus
-  
+
   + + + phil_12.tga           easy/med   moon
 + + +   pekuja_1              easy/med   moon
   + + + phil_5.tga            medium     moon
 + ? + + phil_10.tga           hard       moon
   + + + boss_1.tga            hard       boss
-  
+
 ? + ? ? fydo_1.tga            easy/med   volcano
   ? ? ? tim_1.tga             medium     volcano
   + ? ? phil_9                easy/med   moon
   ? ?   tee_1                 hard       jungle
 - + -   pekuja_2              medium     volcano
   ? - - phil_3                med/hard   jungle
-  ? -   phil_11               
+  ? -   phil_11
     - ? phil_15
   + - - phil_4                medium     volcano
   + - - phil_6                hard       volcano (replace 1st fallies w/ blocks)
@@ -40,7 +40,7 @@ GOD MODE:
 press f10 for god mode!
 
 IMPORTANT NOTES TO CODERS:
-- don't edit level.py !!!! ask phil to 
+- don't edit level.py !!!! ask phil to
 - in general, just add new tiles, and new enemies with CODES, see the HOWTO
 section a bit down the file
 
@@ -59,8 +59,8 @@ HOW TO EDIT LEVELS AND TILES:
 - if you need to resize a level, backup your level, then resize it in an image editor
 
 HOW TO ORGANIZE TILES:
-- all tiles are to be put into tiles.tga 
-- tile size = 16x16 
+- all tiles are to be put into tiles.tga
+- tile size = 16x16
 - it can hold 256 tiles
 - the first 64 tiles should be "general purpose" tiles
 - the next 64 tiles should be "jungle tiles"
@@ -74,7 +74,7 @@ HOW TO NAME SPRITES:
     named something like "player-left-0" etc..
 - All sprites for a given character should be the same size
     so that the bounding box of the characters shape can always be the same
-    
+
 HOWTO ADD A NEW TILE TYPE:
 - open up tiles.py
 - add a line like: 0x01    :[t_init,['solid'],tiles_basic.hit_block,1,1,1,1,],
@@ -90,7 +90,7 @@ and muck around some.  the hit_block can do all kinds of blocks, but mainly
 1,1,1,1 for solid blocks and 1,0,0,0 for platforms are the most useful parameters
 
 TILE CODING TIPS:
-- animation isn't implemented yet, but i'll add that soon enough, don't 
+- animation isn't implemented yet, but i'll add that soon enough, don't
 worry about it for now.  just check out tiles_basic.py for hit methods
 and do the stuff in the previous section. if we need to do anything super
 crazy, ask phil
@@ -111,19 +111,19 @@ MISC SPRITE CODING NOTES:
     - have s.standing attribute = None in init
     - call sprite.check_standing(g,s) at the end of each loop
 - If an object can carry other objects, it must
-    - set b.standing = a .. and .. 
+    - set b.standing = a .. and ..
     - set a.carrying.append(b) when it starts to carry something
-- To get a sprite removed, 
+- To get a sprite removed,
     - s.active = False
     and it will be garbage collected sometime soon :)
     deinit() will be auto-called if needed...
 - The sprites use names like
     'sprite-01' not actual images.  The images are looked up during
     rendering.  Should make things easier to follow.
-- to change the image a sprite is using, 
+- to change the image a sprite is using,
     s.image = 'player-right-%d'%(s.frames%5) , etc ..
-    
-    
+
+
 SOFTWARE OTHER PEOPLE MIGHT NEED:
 http://tortoisesvn.net/downloads
 http://www.python.org/ftp/python/2.5/python-2.5.msi

@@ -4,7 +4,7 @@
 - in phil_13 - make the bird you have to ride to go up the tree be
     a single tile lower so it can be shot when you are small
 
-- add extra life sound effect 
+- add extra life sound effect
 - add "got hit by something" sfx
 
 - insta-death when hitting those fire-ball tiles.
@@ -14,7 +14,7 @@
 - (volcano 3) pekuja's crazy maze level is easy to get yourself into a no-win setup
 - (volcano 3) invalid codes (0x39)
 - (moon 2) 0x59 invalid code
-- (moon 3) 0x59, 0x99 codes 
+- (moon 3) 0x59, 0x99 codes
 
 - fire guy's don't seem very random ?
     - made him random choice each time

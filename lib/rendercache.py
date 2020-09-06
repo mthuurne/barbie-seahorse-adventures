@@ -2,19 +2,19 @@ class RenderCache:
     """Implements a rendering cache that stands in for an object
     having a method called render, and returning a pygame.Surface
     object.
-    
+
     It wraps the rendering object and provides a forwarding method
     called render, which first asks the cache and then, if it has
     no entry for the arguments to the render method, forwards the
     request to the wrapped rendering object, intercepts the result,
     caches it, and returns it.
-    
+
     It provides an end_frame method which deletes cached renders that
     have not been used during the last frame. The assumption is that
     the renders were cached for a certain number of frames, greater
     than 1, but once the value to be shown on the screen has changed,
     the old value will not be required again.
-    
+
     It provides the hit count as the hits attribute, the miss count
     as the misses attribute, and the number of deleted cached renders
     as the deletions attribute.

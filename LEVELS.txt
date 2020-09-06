@@ -20,8 +20,8 @@ HOW TO MAKE A LEVEL!!!
 1. click on run_game.py to try out what we've got
 2. to create a new level, just create a RGBA .tga file that is the size you want ..
 -or-
-2. copy blank.tga (it's pretty big 160x160) 
-3. and edit it with the leveledit.py 
+2. copy blank.tga (it's pretty big 160x160)
+3. and edit it with the leveledit.py
 4. you might want to check out how the magic stuff works in test.tga and phil_1.tga
 
 LEVELEDIT.PY - KEYS AND STUFF
@@ -66,7 +66,7 @@ A. you probably need those red boxes defining the bounds of the viewable part of
 Q. I set the background, but it all looks awful and things are smearing around
 A. See level tip #3 -Make sure the level viewable area is *at least* 20x15 , otherwise
 it won't work.
- 
+
 Q. I made an awesome level, what shouold I do now?
 A. Show it to us on the irc channel... and e-mail it to philhassey@gmail.com - Thanks!
 
@@ -74,7 +74,7 @@ Q. Can I use the red or moon tiles?
 A. Not yet - we need to add enemies for those parts yet (volcano and moon levels)
 
 Q. I used run_game and started the blank level and the screen is blank.
-A.  Use the arrow keys to choose other levels 
+A.  Use the arrow keys to choose other levels
 
 Q. What's the "dotted thing that stops the green enemy" with an arrow up?
 A: place it in a gap to make a frog jump the gap
@@ -120,9 +120,9 @@ DOTTED-GREEN-BOX: defines a "door way" (you have to press a button to use it)
  - to the left of the door code you can put in the "ID" of the door (a number)
  - to the right of the door code you can put in the destiation "ID" where you
  want to transport the player to.  make sure a door exists with that "ID"
- 
+
  * you have to place a door code over the door image *
- 
+
 Anytime a user comes out of a door, you'll want to include a BG code nearby to
 define the background of the area he appears in.
 

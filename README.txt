@@ -35,9 +35,9 @@ HOW TO PLAY THE GAME:
 
 Use your arrow keys to
 move the seahorse.
-Button 1 - Jump 
+Button 1 - Jump
 Button 2 - Shoot
-            
+
 Enemies take 3 shots unless
 you are powered up!  You can
 ride enemy bubbles.

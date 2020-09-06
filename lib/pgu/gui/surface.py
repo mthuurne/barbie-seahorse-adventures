@@ -4,7 +4,7 @@ import pygame
 
 def subsurface(s,r):
     """Return the subsurface of a surface, with some help, checks.
-    
+
     <pre>subsurface(s,r): return surface</pre>
     """
     r = pygame.Rect(r)
@@ -20,17 +20,17 @@ def subsurface(s,r):
 class ProxySurface:
     """
     A surface-like object which smartly handle out-of-area blitting.
-    
+
     <pre>ProxySurface(parent, rect, real_surface=None, offset=(0, 0))</pre>
-    
+
     <p>only one of parent and real_surface should be supplied (non None)</p>
     <dl>
     <dt>parent<dd>a ProxySurface object
     <dt>real_surface<dd>a pygame Surface object
     </dl>
-  
-    <strong>Variables</strong>  
-    
+
+    <strong>Variables</strong>
+
     <dl>
     <dt>mysubsurface<dd>a real and valid pygame.Surface object to be used
                        for blitting.
@@ -52,14 +52,14 @@ class ProxySurface:
             self.mysubsurface = real_surface.subsurface(real_surface.get_rect().clip(rect))
         rect[0], rect[1] = 0, 0
         self.rect = rect
-        
+
     def blit(self, s, pos, rect=None):
         if rect == None: rect = s.get_rect()
         pos = (pos[0] + self.offset[0] + self.x, pos[1] + self.offset[1] + self.y)
         self.mysubsurface.blit(s, pos, rect)
-        
+
     def subsurface(self, rect): return ProxySurface(self, pygame.Rect(rect).move(self.offset[0] + self.x, self.offset[1] + self.y),self.real_surface)
-    def fill(self, color, rect=None): 
+    def fill(self, color, rect=None):
         if rect != None: self.mysubsurface.fill(color, rect)
         else: self.mysubsurface.fill(color)
     def get_rect(self): return self.rect
@@ -67,9 +67,9 @@ class ProxySurface:
     def get_height(self): return self.rect[3]
     def get_abs_offset(): return self.rect[:2]
     def get_abs_parent(): return self.mysubsurface.get_abs_parent()
-    def set_clip(self, rect=None): 
+    def set_clip(self, rect=None):
         if rect == None: self.mysubsurface.set_clip()
-        else: 
+        else:
             rect = [rect[0] + self.offset[0] + self.x, rect[1] + self.offset[0] + self.y, rect[2], rect[3]]
             self.mysubsurface.set_clip(rect)
 
@@ -81,17 +81,17 @@ class ProxySurface:
 class xProxySurface:
     """
     A surface-like object which smartly handle out-of-area blitting.
-    
+
     <pre>ProxySurface(parent, rect, real_surface=None, offset=(0, 0))</pre>
-    
+
     <p>only one of parent and real_surface should be supplied (non None)</p>
     <dl>
     <dt>parent<dd>a ProxySurface object
     <dt>real_surface<dd>a pygame Surface object
     </dl>
-  
-    <strong>Variables</strong>  
-    
+
+    <strong>Variables</strong>
+
     <dl>
     <dt>mysubsurface<dd>a real and valid pygame.Surface object to be used
                        for blitting.
@@ -113,14 +113,14 @@ class xProxySurface:
             self.mysubsurface = real_surface.subsurface(real_surface.get_rect().clip(rect))
         rect[0], rect[1] = 0, 0
         self.rect = rect
-        
+
     def blit(self, s, pos, rect=None):
         if rect == None: rect = s.get_rect()
         pos = (pos[0] + self.offset[0] + self.x, pos[1] + self.offset[1] + self.y)
         self.mysubsurface.blit(s, pos, rect)
-        
+
     def subsurface(self, rect): return ProxySurface(self, pygame.Rect(rect).move(self.offset[0] + self.x, self.offset[1] + self.y),self.real_surface)
-    def fill(self, color, rect=None): 
+    def fill(self, color, rect=None):
         if rect != None: self.mysubsurface.fill(color, rect)
         else: self.mysubsurface.fill(color)
     def get_rect(self): return self.rect
@@ -128,8 +128,8 @@ class xProxySurface:
     def get_height(self): return self.rect[3]
     def get_abs_offset(): return self.rect[:2]
     def get_abs_parent(): return self.mysubsurface.get_abs_parent()
-    def set_clip(self, rect=None): 
+    def set_clip(self, rect=None):
         if rect == None: self.mysubsurface.set_clip()
-        else: 
+        else:
             rect = [rect[0] + self.offset[0] + self.x, rect[1] + self.offset[0] + self.y, rect[2], rect[3]]
             self.mysubsurface.set_clip(rect)
