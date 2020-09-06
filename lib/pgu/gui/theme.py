@@ -408,33 +408,33 @@ class Theme:
 
         s.set_clip(pygame.Rect(x+ww,y+hh,w-ww*2,h-hh*2))
         src.x,src.y = ww,hh
-        for dest.y in xrange(y+hh,yy-hh,hh):
-            for dest.x in xrange(x+ww,xx-ww,ww): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh,hh):
+            for dest.x in range(x+ww,xx-ww,ww): s.blit(box,dest,src)
 
         s.set_clip(pygame.Rect(x+ww,y,w-ww*3,hh))
         src.x,src.y,dest.y = ww,0,y
-        for dest.x in xrange(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
+        for dest.x in range(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
         dest.x = xx-ww*2
         s.set_clip(pygame.Rect(x+ww,y,w-ww*2,hh))
         s.blit(box,dest,src)
 
         s.set_clip(pygame.Rect(x+ww,yy-hh,w-ww*3,hh))
         src.x,src.y,dest.y = ww,hh*2,yy-hh
-        for dest.x in xrange(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
+        for dest.x in range(x+ww,xx-ww*2,ww): s.blit(box,dest,src)
         dest.x = xx-ww*2
         s.set_clip(pygame.Rect(x+ww,yy-hh,w-ww*2,hh))
         s.blit(box,dest,src)
 
         s.set_clip(pygame.Rect(x,y+hh,xx,h-hh*3))
         src.y,src.x,dest.x = hh,0,x
-        for dest.y in xrange(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
         dest.y = yy-hh*2
         s.set_clip(pygame.Rect(x,y+hh,xx,h-hh*2))
         s.blit(box,dest,src)
 
         s.set_clip(pygame.Rect(xx-ww,y+hh,xx,h-hh*3))
         src.y,src.x,dest.x=hh,ww*2,xx-ww
-        for dest.y in xrange(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
+        for dest.y in range(y+hh,yy-hh*2,hh): s.blit(box,dest,src)
         dest.y = yy-hh*2
         s.set_clip(pygame.Rect(xx-ww,y+hh,xx,h-hh*2))
         s.blit(box,dest,src)

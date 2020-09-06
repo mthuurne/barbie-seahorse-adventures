@@ -19,8 +19,8 @@ import levels
 def load_level(fname):
     img = pygame.image.load(fname)
     w, h = img.get_width(), img.get_height()
-    fg, bg, codes = [[[0] * w for y in xrange(h)] for _ in xrange(3)]
-    rw, rh = xrange(w), xrange(h)
+    fg, bg, codes = [[[0] * w for y in range(h)] for _ in range(3)]
+    rw, rh = range(w), range(h)
     for y in rh:
         for x in rw:
             fg[y][x], bg[y][x], codes[y][x], _ = img.get_at((x, y))
@@ -30,7 +30,7 @@ def load_level(fname):
 def load_tiles(fname):
     img = pygame.image.load(fname).convert_alpha()
     w, h = img.get_width() / TW, img.get_height() / TH
-    return [img.subsurface((n % w) * TW, (n / w) * TH, TW, TH) for n in xrange(w * h)]
+    return [img.subsurface((n % w) * TW, (n / w) * TH, TW, TH) for n in range(w * h)]
 
 
 def load_images(dname):
@@ -104,7 +104,7 @@ class Level:
 
         import tiles
         self.tile_animation = []
-        for m in xrange(IROTATE):
+        for m in range(IROTATE):
             r = list(self._tiles)
             for n, incs in tiles.TANIMATE:
                 n2 = n + incs[m % len(incs)]
@@ -129,15 +129,15 @@ class Level:
         self.codes_data = codes_data
 
         # initialize all the tiles ...
-        self.layer = [[None] * self.size[0] for y in xrange(self.size[1])]
-        self.drawfg = [[0] * self.size[0] for y in xrange(self.size[1])]
+        self.layer = [[None] * self.size[0] for y in range(self.size[1])]
+        self.drawfg = [[0] * self.size[0] for y in range(self.size[1])]
 
         # Create a surface containing solely the immutable background.
         # Part of this surface is drawn onto the screen using one blit call,
         # followed by the mutable tiles, drawn using one blit call per tile.
         # See tiles.TIMMUTABLE for the full definition of 'immutable'.
         self.bg2 = pygame.Surface((self.size[0] * TW, self.size[1] * TH), pygame.SRCALPHA)
-        rw, rh = xrange(self.size[0]), xrange(self.size[1])
+        rw, rh = range(self.size[0]), range(self.size[1])
         for y in rh:
             fg_row, bg_row, codes_row = fg[y], bg[y], codes_data[y]
             for x in rw:
@@ -166,8 +166,8 @@ class Level:
         self.bkgr = pygame.image.load(data.filepath(os.path.join('bkgr', fname))).convert()
 
     def run_codes(self, r):
-        rw = xrange(max(r.left / TW, 0), min(r.right / TW, self.size[0]))
-        rh = xrange(max(r.top / TH, 0), min(r.bottom / TH, self.size[1]))
+        rw = range(max(r.left / TW, 0), min(r.right / TW, self.size[0]))
+        rh = range(max(r.top / TH, 0), min(r.bottom / TH, self.size[1]))
         for y in rh:
             row = self.codes_data[y]
             for x in rw:
@@ -250,8 +250,8 @@ class Level:
         screen.blit(self.bg2, (0, 0), v)
 
         tiles = self.tile_animation[self.frame % IROTATE]
-        rw = xrange(v.left - v.left % TW, v.right, TW)
-        rh = xrange(v.top - v.top % TH, v.bottom, TH)
+        rw = range(v.left - v.left % TW, v.right, TW)
+        rh = range(v.top - v.top % TH, v.bottom, TH)
         for y in rh:
             row = self.drawfg[y / TH]
             for x in rw:
@@ -269,7 +269,7 @@ class Level:
             else:
                 w = img.get_width()
                 top = s.rect.y - s.shape.y - v.y - img.get_height() / 2 * s.exploded
-                for ty in xrange(img.get_height()):
+                for ty in range(img.get_height()):
                     screen.blit(img, (s.rect.x - s.shape.x - v.x, top + ty * (1 + s.exploded)), (0, ty, w, 1))
 
         screen = _screen
@@ -324,8 +324,8 @@ class Level:
                 if len(s.groups):
                     r = s.rect
                     hits = []
-                    rw = xrange(max(r.left - r.left % TW, 0), min(r.right, self.size[0] * TW), TW)
-                    rh = xrange(max(r.top - r.top % TH, 0), min(r.bottom, self.size[1] * TH), TH)
+                    rw = range(max(r.left - r.left % TW, 0), min(r.right, self.size[0] * TW), TW)
+                    rh = range(max(r.top - r.top % TH, 0), min(r.bottom, self.size[1] * TH), TH)
                     for y in rh:
                         row = self.layer[y / TH]
                         for x in rw:
@@ -428,7 +428,7 @@ class Level:
         blit(img, (x, y))
 
         # text = 'LIVES: %d'%self.game.lives
-        for i in xrange(self.game.lives):
+        for i in range(self.game.lives):
             img = self._tiles[0x0C]  # the extra life tile
             x, y = SW - 1.05 * img.get_width() * i - img.get_width() - pad, pad
             blit(img, (x, y))

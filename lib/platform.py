@@ -12,17 +12,17 @@ def init(g, r, n, vx, vy):
     code = g.codes_data[y][x]
     min_x = x
     max_x = x
-    for dx in xrange(1, 4):
+    for dx in range(1, 4):
         if g.codes_data[y][x + dx] != code:
             break
         max_x = x + dx
-    for dx in xrange(-1, -4, -1):
+    for dx in range(-1, -4, -1):
         if g.codes_data[y][x + dx] != code:
             break
         min_x = x + dx
 
     iy = y
-    for ix in xrange(min_x, max_x + 1):
+    for ix in range(min_x, max_x + 1):
         if (ix, iy) in g.codes:
             return
 

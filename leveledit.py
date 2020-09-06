@@ -179,7 +179,7 @@ class _app(gui.Container):
 
 
         tmp = self.level.tiles
-        self.level.tiles = [None for i in xrange(256)]
+        self.level.tiles = [None for i in range(256)]
         self.level.tga_load_tiles(self.codes,(self.tile_w,self.tile_h))
         self.level.codes = self.level.tiles
         self.level.tiles = tmp
@@ -839,8 +839,8 @@ def cmd_delete(value):
 def cmd_tswitch(value):
     blayer = app.level.blayer
     tlayer = app.level.tlayer
-    for ty in xrange(app.level.size[1]):
-        for tx in xrange(app.level.size[0]):
+    for ty in range(app.level.size[1]):
+        for tx in range(app.level.size[0]):
             tmp = blayer[ty][tx]
             blayer[ty][tx] = tlayer[ty][tx]
             tlayer[ty][tx] = tmp

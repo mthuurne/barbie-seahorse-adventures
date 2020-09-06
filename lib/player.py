@@ -224,8 +224,8 @@ def loop(g, s):
     if hasattr(g, 'boss'):
         # print g.boss.phase, g.boss.phase_frames
         if g.boss.phase == 2 and g.boss.phase_frames == 60:
-            for y in xrange(len(g.layer)):
-                for x in xrange(len(g.layer[y])):
+            for y in range(len(g.layer)):
+                for x in range(len(g.layer[y])):
                     if g.codes_data[y][x] == CODE_BOSS_PHASE2_BLOCK:
                         tiles.t_put(g, (x, y), 0x01)  # solid tile
         if g.boss.dead:

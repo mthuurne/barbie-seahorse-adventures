@@ -62,8 +62,8 @@ def hit(g, pos, b):
 
     w, h = g.size
     xx, yy = cx, cy
-    for y in xrange(h):
-        for x in xrange(w):
+    for y in range(h):
+        for x in range(w):
             if layer[y][x] in DOOR_CODES and layer[y][x - 1] == n_code:
                 xx, yy = x, y
 

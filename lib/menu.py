@@ -70,7 +70,7 @@ class Menu(engine.State):
         fnt = self.font
 
         x = 90
-        for n in xrange(len(self.items)):
+        for n in range(len(self.items)):
             text, value = self.items[n]
             text = text.replace('L', self.levels[self.game.lcur][1])
             c = (0x00, 0x00, 0x00)
@@ -331,7 +331,7 @@ class Prompt(engine.State):
         line_height = 24
         top = (SH - line_height * len(text)) / 2
 
-        for line_number in xrange(len(text)):
+        for line_number in range(len(text)):
             c = (0, 0, 0)
             line = text[line_number]
             img = fnt.render(line, 1, c)

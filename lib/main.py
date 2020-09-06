@@ -169,7 +169,7 @@ class Game(engine.Game):
 
             # silly TV effect ...
             if '-tv' in sys.argv:
-                for y in xrange(0, SH * 2, 2):
+                for y in range(0, SH * 2, 2):
                     self._screen.fill((0, 0, 0), (0, y, SW * 2, 1))
 
         pygame.display.flip()
