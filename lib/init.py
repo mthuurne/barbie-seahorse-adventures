@@ -1,20 +1,22 @@
+from __future__ import division
+
 from cnst import *
 
 import tiles
 
 # def bounds(g,r,n,*params):
-    # pos = r.centerx/TW,r.centery/TH
+    # pos = r.centerx//TW,r.centery//TH
     # tiles.t_put(g,pos,1)
 
 
 def init_bkgr(g, r, n):
-    x, y = r.centerx / TW, r.centery / TH
+    x, y = r.centerx // TW, r.centery // TH
     n = g.codes_data[y][x + 1]
     g.set_bkgr('%x.png' % n)
 
 
 def init_music(g, r, n):
-    x, y = r.centerx / TW, r.centery / TH
+    x, y = r.centerx // TW, r.centery // TH
     n = g.codes_data[y][x + 1]
     # print 'play music',n
     g.game.music_play('%s' % n)

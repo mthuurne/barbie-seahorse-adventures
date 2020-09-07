@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -8,7 +10,7 @@ class Sprite:
 
     def __init__(self, r, n):
         self.rect = pygame.Rect(r)
-        self.pos = r.centerx / TH, r.centery / TW
+        self.pos = r.centerx // TH, r.centery // TW
         self.image = n
         self.shape = pygame.Rect(0, 0, TW, TH)
         self.exploded = 0
@@ -81,7 +83,7 @@ def deinit(g, s):
 
 
 def init_bounds(g, s):
-    x, y = s.rect.centerx / TW, s.rect.centery / TH
+    x, y = s.rect.centerx // TW, s.rect.centery // TH
     min_x, min_y, max_x, max_y = x, y, x, y
     while g.codes_data[y][min_x] != CODE_BOUNDS:
         min_x -= 1
@@ -130,8 +132,8 @@ def get_code(g, s, ix, iy):
     r = s.rect
     x = [r.left, r.centerx, r.right][dx + 1]
     y = [r.top, r.centery, r.bottom][dy + 1]
-    x = (x + dx) / TW + dx * max(0, abs(ix) - 1)
-    y = (y + dy) / TH + dy * max(0, abs(iy) - 1)
+    x = (x + dx) // TW + dx * max(0, abs(ix) - 1)
+    y = (y + dy) // TH + dy * max(0, abs(iy) - 1)
     if x < 0 or y < 0 or x >= g.size[0] or y >= g.size[1]:
         return 0
     return g.codes_data[y][x]

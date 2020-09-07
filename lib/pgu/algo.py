@@ -3,6 +3,7 @@
 <p>please note that this file is alpha, and is subject to modification in
 future versions of pgu!</p>
 """
+from __future__ import division
 from __future__ import print_function
 print('pgu.algo','This module is alpha, and is subject to change.')
 
@@ -67,7 +68,7 @@ def astar(start,end,layer,_dist):
             lo = 0
             hi = len(opens)
             while lo < hi:
-                mid = (lo+hi)/2
+                mid = (lo+hi)//2
                 if new.f < opens[mid].f: hi = mid
                 else: lo = mid + 1
             opens.insert(lo,new)
@@ -111,13 +112,13 @@ def getline(a,b):
     if dx >= dy:
         xi1,yi2 = 0,0
         d = dx
-        n = dx/2
+        n = dx//2
         a = dy
         p = dx
     else:
         xi2,yi1 = 0,0
         d = dy
-        n = dy/2
+        n = dy//2
         a = dx
         p = dy
 

@@ -20,6 +20,8 @@ this interface.</p>
 Bible of the same name for historical reasons.)</p>
 """
 
+from __future__ import division
+
 import pygame
 from pygame.rect import Rect
 from pygame.locals import *
@@ -458,17 +460,17 @@ class Vid:
                 hits = []
                 ct,cb,cl,cr = rect.top,rect.bottom,rect.left,rect.right
                 #nasty ol loops
-                y = ct/th*th
+                y = ct//th*th
                 while y < cb:
-                    x = cl/tw*tw
-                    yy = y/th
+                    x = cl//tw*tw
+                    yy = y//th
                     while x < cr:
-                        xx = x/tw
+                        xx = x//tw
                         t = tiles[layer[yy][xx]]
                         if (s.groups & t.agroups)!=0:
                             #self.hit(xx,yy,t,s)
-                            d = math.hypot(rect.centerx-(xx*tw+tw/2),
-                                rect.centery-(yy*th+th/2))
+                            d = math.hypot(rect.centerx-(xx*tw+tw//2),
+                                rect.centery-(yy*th+th//2))
                             hits.append((d,t,xx,yy))
 
                         x += tw
@@ -488,16 +490,16 @@ class Vid:
                 hits = []
                 ct,cb,cl,cr = rect.top,rect.bottom,rect.left,rect.right
                 #nasty ol loops
-                y = ct/th*th
+                y = ct//th*th
                 while y < cb:
-                    x = cl/tw*tw
-                    yy = y/th
+                    x = cl//tw*tw
+                    yy = y//th
                     while x < cr:
-                        xx = x/tw
+                        xx = x//tw
                         t = tiles[layer[yy][xx]]
                         if (s.groups & t.agroups)!=0:
-                            d = math.hypot(rect.centerx-(xx*tw+tw/2),
-                                rect.centery-(yy*th+th/2))
+                            d = math.hypot(rect.centerx-(xx*tw+tw//2),
+                                rect.centery-(yy*th+th//2))
                             hits.append((d,t,xx,yy))
                             #self.hit(xx,yy,t,s)
                         x += tw

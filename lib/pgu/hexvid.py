@@ -9,6 +9,7 @@ help would be greatly appreciated!</p>
 future versions of pgu!</p>
 
 """
+from __future__ import division
 from __future__ import print_function
 print('pgu.hexvid','This module is alpha, and is subject to change.')
 
@@ -33,7 +34,7 @@ class Hexvid(Vid):
         #iso_w,iso_h,iso_z,tile_w,tile_h,base_w,base_h = self.iso_w,self.iso_h,self.iso_z,self.tile_w,self.tile_h,self.base_w,self.base_h
 
         tile_w,tile_h = self.tile_w,self.tile_h
-        tile_w2,tile_h2 = tile_w/2,tile_h/2
+        tile_w2,tile_h2 = tile_w//2,tile_h//2
 
         view = self.view
         adj = self.adj = pygame.Rect(-self.view.x,-self.view.y,0,0)
@@ -59,20 +60,20 @@ class Hexvid(Vid):
 
         bot = 1
 
-        tile_wi = tile_w + tile_w/2
-        tile_wi2 = tile_wi/2
+        tile_wi = tile_w + tile_w//2
+        tile_wi2 = tile_wi//2
 
-        #dx += tile_w/2
+        #dx += tile_w//2
 
-        for i2 in range(-bot,self.view.h/tile_h2+bot*3): #NOTE: 3 seems a bit much, but it works.
-            tx,ty = ox + i2/2 + i2%2,oy + i2/2
+        for i2 in range(-bot,self.view.h//tile_h2+bot*3): #NOTE: 3 seems a bit much, but it works.
+            tx,ty = ox + i2//2 + i2%2,oy + i2//2
             x,y = (i2%2)*tile_wi2 + dx,i2*tile_h2 + dy
 
             #to adjust for the -1 in i1
             x,tx,ty = x-tile_wi,tx-1,ty+1
 
-            x -= tile_w/2
-            for i1 in range(-1,self.view.w/tile_wi+1):
+            x -= tile_w//2
+            for i1 in range(-1,self.view.w//tile_wi+1):
                 if ty >= 0 and ty < h and tx >= 0 and tx < w:
                     if blayer != None:
                         n = blayer[ty][tx]
@@ -95,24 +96,24 @@ class Hexvid(Vid):
 
     def view_to_tile(self,pos):
         x,y = pos
-        #x = x + (self.tile_w*1/2)
+        #x = x + (self.tile_w*1//2)
 
-        x,y = int(x*4/(self.tile_w*3)), y*2/self.tile_h
-        nx = (x + y) / 2
-        ny = (y - x) / 2
+        x,y = int(x*4//(self.tile_w*3)), y*2//self.tile_h
+        nx = (x + y) // 2
+        ny = (y - x) // 2
         return nx,ny
 
     def tile_to_view(self,pos):
         x,y = pos
         nx = x - y
         ny = x + y
-        nx,ny = int(nx*(self.tile_w*3)/4), ny*self.tile_h/2
+        nx,ny = int(nx*(self.tile_w*3)//4), ny*self.tile_h//2
 
-        #nx = nx - (self.tile_w*1/2)
+        #nx = nx - (self.tile_w*1//2)
         return nx,ny
 
     def screen_to_tile(self,pos): #NOTE HACK : not sure if the 3/8 is right or not, but it is pretty close...
-        pos = pos[0]+self.view.x + self.tile_w*3/8,pos[1]+self.view.y
+        pos = pos[0]+self.view.x + self.tile_w*3//8,pos[1]+self.view.y
         pos = self.view_to_tile(pos)
         return pos
 

@@ -1,4 +1,7 @@
 """document layout engine."""
+
+from __future__ import division
+
 class Layout:
     """the document layout engine
 
@@ -84,7 +87,7 @@ class Layout:
 
         if align == 0:
             self.line()
-            self.x = self.rect.left + (self.rect.width-w)/2
+            self.x = self.rect.left + (self.rect.width-w)//2
             self.fit = 0
         elif align == -1:
             self.line()
@@ -151,7 +154,7 @@ class Layout:
 
         if align == -1: x = x1
         elif align == 0:
-            x = x1 + ((x2-x1)-w)/2
+            x = x1 + ((x2-x1)-w)//2
             self.fit = 0
         elif align == 1: x = x2 - w
 

@@ -3,6 +3,7 @@ Upload script specifically engineered for the PyWeek challenge.
 
 Handles authentication and gives upload progress feedback.
 '''
+from __future__ import division
 from __future__ import print_function
 import sys, os, httplib, cStringIO, socket, time, getopt
 
@@ -42,12 +43,12 @@ class Progress:
     def __init__(self, info, data):
         self.info = info
         self.tosend = len(data)
-        self.total = self.tosend/1024
+        self.total = self.tosend//1024
         self.data = cStringIO.StringIO(data)
         self.start = self.now = time.time()
         self.sent = 0
         self.num = 0
-        self.stepsize = self.total / 100 or 1
+        self.stepsize = self.total // 100 or 1
         self.steptimes = []
         self.display()
 
@@ -76,23 +77,23 @@ class Progress:
         self.steptimes.insert(0, steptime)
         if len(self.steptimes) > 5:
             self.steptimes.pop()
-        steptime = sum(self.steptimes) / len(self.steptimes)
+        steptime = sum(self.steptimes) // len(self.steptimes)
         self.now = now
-        eta = steptime * ((self.total - self.num)/self.stepsize)
+        eta = steptime * ((self.total - self.num)//self.stepsize)
 
         # tell it like it is (or might be)
         if now - self.start > 3:
-            M = eta / 60
-            H = M / 60
+            M = eta // 60
+            H = M // 60
             M = M % 60
             S = eta % 60
             if self.total:
                 s = '%s %2d%% (ETA %02d:%02d:%02d)'%(self.info,
-                    self.num * 100. / self.total, H, M, S)
+                    self.num * 100 / self.total, H, M, S)
             else:
                 s = '%s 0%% (ETA %02d:%02d:%02d)'%(self.info, H, M, S)
         elif self.total:
-            s = '%s %2d%%'%(self.info, self.num * 100. / self.total)
+            s = '%s %2d%%'%(self.info, self.num * 100 / self.total)
         else:
             s = '%s %d done'%(self.info, self.num)
         sys.stdout.write(s + ' '*(75-len(s)) + '\r')

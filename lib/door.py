@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -10,7 +12,7 @@ import player
 def init(g, r, n, hidden=False, *params):
     s = sprite.Sprite3(g, r, 'door-1', (0, 0, 16, 24))  # 3
     s.rect.centerx = r.centerx
-    s.rect.centery = r.centery - (24 - 16) / 2
+    s.rect.centery = r.centery - (24 - 16) // 2
     s.loop = loop
     s.hit = sprite_hit
     s.frame = 0

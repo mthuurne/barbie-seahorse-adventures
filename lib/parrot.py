@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -48,7 +50,7 @@ def loop(g, s):
     s.rect.x += s.vx * 1
     s.rect.y += s.vy
 
-    s.image = 'parrot/%s-%d' % (s.facing, (g.frame / (FPS / 8)) % 4)
+    s.image = 'parrot/%s-%d' % (s.facing, (g.frame // (FPS // 8)) % 4)
 
     # sprite.check_standing(g,s)
 

@@ -8,6 +8,7 @@ greatly appreciated!</p>
 future versions of pgu!</p>
 
 """
+from __future__ import division
 from __future__ import print_function
 print('pgu.isovid','This module is alpha, and is subject to change.')
 
@@ -29,11 +30,11 @@ class Isovid(Vid):
 
         iso_w,iso_h,iso_z,tile_w,tile_h,base_w,base_h = self.iso_w,self.iso_h,self.iso_z,self.tile_w,self.tile_h,self.base_w,self.base_h
 
-        base_h2 = base_h/2
-        base_w2 = base_w/2
+        base_h2 = base_h//2
+        base_w2 = base_w//2
 
-        bot = tile_h/base_h2
-        todo_max = sh/base_h2+bot
+        bot = tile_h//base_h2
+        todo_max = sh//base_h2+bot
         todo = [[] for y in range(0,todo_max)]
 
         self.view.w,self.view.h = sw,sh
@@ -43,7 +44,7 @@ class Isovid(Vid):
         for s in self.sprites:
             self.sprite_calc_irect(s)
             x,y = self.iso_to_view((s.rect.centerx,s.rect.centery))
-            v = (y+adj.y)/base_h2 - 1
+            v = (y+adj.y)//base_h2 - 1
             if v >= 0 and v < todo_max:
                 todo[v].append((s.image,s.irect))
             #else: print 'doesnt fit',v
@@ -66,13 +67,13 @@ class Isovid(Vid):
         sx,sy = self.iso_to_view((ox*iso_w,oy*iso_h))
         dx,dy = sx - self.view.x,sy - self.view.y
 
-        for i2 in range(-bot,self.view.h/base_h2+bot):
-            tx,ty = ox + i2/2 + i2%2,oy + i2/2
+        for i2 in range(-bot,self.view.h//base_h2+bot):
+            tx,ty = ox + i2//2 + i2%2,oy + i2//2
             x,y = (i2%2)*base_w2 + dx,i2*base_h2 + dy
 
             #to adjust for the -1 in i1
             x,tx,ty = x-base_w,tx-1,ty+1
-            for i1 in range(-1,self.view.w/base_w+2): #NOTE: not sure why +2
+            for i1 in range(-1,self.view.w//base_w+2): #NOTE: not sure why +2
                 if ty >= 0 and ty < h and tx >= 0 and tx < w:
                     z = zlayer[ty][tx]*iso_z
                     if blayer != None:
@@ -90,7 +91,7 @@ class Isovid(Vid):
                 tx += 1
                 ty -= 1
                 x += base_w
-            for img,irect in todo[y/base_h2]:
+            for img,irect in todo[y//base_h2]:
                 screen.blit(img,(irect.x+adj.x,irect.y+adj.y))
 
         return [pygame.Rect(0,0,screen.get_width(),screen.get_height())]
@@ -101,10 +102,10 @@ class Isovid(Vid):
 
         x,y = pos
 
-        #nx,ny = (h*self.iso_w + x - y)/2, (0 + x + y)/2
-        nx,ny = (x - y)/2, (0 + x + y)/2
+        #nx,ny = (h*self.iso_w + x - y)//2, (0 + x + y)//2
+        nx,ny = (x - y)//2, (0 + x + y)//2
 
-        return (nx * self.base_w / self.iso_w), (ny * self.base_h / self.iso_h)
+        return (nx * self.base_w // self.iso_w), (ny * self.base_h // self.iso_h)
 
     def view_to_iso(self,pos):
         tlayer = self.tlayer
@@ -112,10 +113,10 @@ class Isovid(Vid):
 
         x,y = pos
 
-        x,y = x*self.iso_w/self.base_w, y*self.iso_h/self.base_h
+        x,y = x*self.iso_w//self.base_w, y*self.iso_h//self.base_h
 
-        #x -= (self.iso_w/2) * h
-        #x -= (self.iso_w/2) * h
+        #x -= (self.iso_w//2) * h
+        #x -= (self.iso_w//2) * h
 
         nx = (x+y)
         ny = y*2-nx
@@ -130,7 +131,7 @@ class Isovid(Vid):
         x += self.view.x
         y += self.view.y
         x,y = self.view_to_iso((x,y))
-        return x/self.iso_w,y/self.iso_h
+        return x//self.iso_w,y//self.iso_h
 
     def tile_to_screen(self,pos):
         x,y = self.iso_to_view((pos[0]*self.iso_w,pos[1]*self.iso_h))
@@ -141,7 +142,7 @@ class Isovid(Vid):
 
         self.tile_w,self.tile_h = size
         self.iso_w,self.iso_h,self.iso_z = self.tile_w,self.tile_w,1
-        self.base_w,self.base_h = self.tile_w,self.tile_w/2
+        self.base_w,self.base_h = self.tile_w,self.tile_w//2
 
 
 
@@ -162,7 +163,7 @@ class Isovid(Vid):
         zlayer = self.zlayer
 
         x,y = self.iso_to_view((s.rect.centerx,s.rect.centery))
-        tx,ty = s.rect.centerx/self.iso_w,s.rect.centery/self.iso_h
+        tx,ty = s.rect.centerx//self.iso_w,s.rect.centery//self.iso_h
         z = 0
         if ty >= 0 and ty < h and tx >= 0 and tx < w:
             z = zlayer[ty][tx]*self.iso_z

@@ -1,5 +1,8 @@
 """a collection of text rendering functions
 """
+
+from __future__ import division
+
 def write(s,font,pos,color,text,border=1):
     """write text to a surface with a black border
 
@@ -18,8 +21,8 @@ def writec(s,font,color,text,border=1):
     <pre>writec(s,font,color,text,border=1)</pre>
     """
     w,h = font.size(text)
-    x = (s.get_width()-w)/2
-    y = (s.get_height()-h)/2
+    x = (s.get_width()-w)//2
+    y = (s.get_height()-h)//2
     write(s,font,(x,y),color,text,border)
 
 def writepre(s,font,rect,color,text):

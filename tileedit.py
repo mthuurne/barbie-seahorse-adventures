@@ -60,6 +60,8 @@ F10 - toggle fullscreen
 </pre>
 """
 
+from __future__ import division
+
 import os,sys
 from optparse import OptionParser
 from ConfigParser import ConfigParser
@@ -195,7 +197,7 @@ class cpicker(gui.Widget):
 
     def event(self,e):
         if (e.type is MOUSEBUTTONDOWN) or (e.type is MOUSEMOTION and e.buttons[0] == 1 and self.container.myfocus == self):
-            x,y = e.pos[0]*self.palette_w/self.rect.w,e.pos[1]*self.palette_h/self.rect.h
+            x,y = e.pos[0]*self.palette_w//self.rect.w,e.pos[1]*self.palette_h//self.rect.h
             x,y = max(0,x),max(0,y)
             x,y = min(self.palette_w-1,x),min(self.palette_h-1,y)
 
@@ -223,11 +225,11 @@ class tpicker(gui.Widget):
 
     def event(self,e):
         if (e.type is MOUSEBUTTONDOWN and e.button == 1) or (e.type is MOUSEMOTION and e.buttons[0] == 1 and self.container.myfocus == self):
-            x,y = e.pos[0]/app.tile_w*app.tile_w,e.pos[1]/app.tile_h*app.tile_h
+            x,y = e.pos[0]//app.tile_w*app.tile_w,e.pos[1]//app.tile_h*app.tile_h
             self.pick((x,y))
 
         if (e.type is MOUSEBUTTONDOWN and e.button == 3) or (e.type is MOUSEMOTION and e.buttons[2] == 1 and self.container.myfocus == self):
-            x,y = e.pos[0]-app.tile_w/2,e.pos[1]-app.tile_h/2
+            x,y = e.pos[0]-app.tile_w//2,e.pos[1]-app.tile_h//2
             x = min(self.rect.w-app.tile_w-1,max(0,x))
             y = min(self.rect.h-app.tile_h-1,max(0,y))
             self.pick((x,y))
@@ -262,17 +264,17 @@ class tdraw(gui.Widget):
         for y in range(0,app.tile_h*2):
             for x in range(0,app.tile_w*2):
                 s.fill(clrs[(x+y)%2],(
-                    self.rect.w*x/(app.tile_w*2),
-                    self.rect.h*y/(app.tile_h*2),
-                    self.rect.w/(app.tile_w*2)+1,
-                    self.rect.h/(app.tile_h*2)+2))
+                    self.rect.w*x//(app.tile_w*2),
+                    self.rect.h*y//(app.tile_h*2),
+                    self.rect.w//(app.tile_w*2)+1,
+                    self.rect.h//(app.tile_h*2)+2))
         self.bg = s
 
         s = pygame.Surface((self.rect.w,self.rect.h), pygame.SRCALPHA)
         for x in range(0,app.tile_w):
-            pygame.draw.line(s,(0,0,0),(self.rect.w*x/app.tile_w,0),(self.rect.w*x/app.tile_w,self.rect.h))
+            pygame.draw.line(s,(0,0,0),(self.rect.w*x//app.tile_w,0),(self.rect.w*x//app.tile_w,self.rect.h))
         for y in range(0,app.tile_h):
-            pygame.draw.line(s,(0,0,0),(0,self.rect.h*y/app.tile_h),(self.rect.w,self.rect.h*y/app.tile_h))
+            pygame.draw.line(s,(0,0,0),(0,self.rect.h*y//app.tile_h),(self.rect.w,self.rect.h*y//app.tile_h))
         self.grid = s
 
 
@@ -283,7 +285,7 @@ class tdraw(gui.Widget):
         #if app.mode == 'select':
         s.blit(self.grid,(0,0))
         r = app.select
-        pygame.draw.rect(s,(255,255,255,128),Rect(r.x*self.rect.w/app.tile_w,r.y*self.rect.h/app.tile_h,r.w*self.rect.w/app.tile_w,r.h*self.rect.h/app.tile_h),4)
+        pygame.draw.rect(s,(255,255,255,128),Rect(r.x*self.rect.w//app.tile_w,r.y*self.rect.h//app.tile_h,r.w*self.rect.w//app.tile_w,r.h*self.rect.h//app.tile_h),4)
 
     def event(self,e):
         if (e.type is MOUSEBUTTONDOWN and e.button == 3) or (e.type is MOUSEMOTION and e.buttons[2]==1 and self.container.myfocus == self):
@@ -392,15 +394,15 @@ class tdraw(gui.Widget):
         self.repaint()
 
     def getpos(self,e):
-        x,y = (e.pos[0])*app.tile_w/self.rect.w,(e.pos[1])*app.tile_h/self.rect.h
+        x,y = (e.pos[0])*app.tile_w//self.rect.w,(e.pos[1])*app.tile_h//self.rect.h
         x = min(max(0,x),app.tile_w-1)
         y = min(max(0,y),app.tile_h-1)
         return x,y
 
     def getpos2(self,e):
-        w = self.rect.w/app.tile_w
-        h = self.rect.h/app.tile_h
-        x,y = (e.pos[0]+w/2)*app.tile_w/self.rect.w,(e.pos[1]+h/2)*app.tile_h/self.rect.h
+        w = self.rect.w//app.tile_w
+        h = self.rect.h//app.tile_h
+        x,y = (e.pos[0]+w//2)*app.tile_w//self.rect.w,(e.pos[1]+h//2)*app.tile_h//self.rect.h
         x = min(max(0,x),app.tile_w)
         y = min(max(0,y),app.tile_h)
         return x,y
@@ -415,7 +417,7 @@ class tdraw(gui.Widget):
 
     def select_drag(self,e):
         pos = self.getpos2(e)
-        #pos = (e.pos[0]+app.tile_w/2)/app.tile_w,(e.pos[1]+app.tile_h/2)/app.tile_h
+        #pos = (e.pos[0]+app.tile_w//2)//app.tile_w,(e.pos[1]+app.tile_h//2)//app.tile_h
 
         app.select = Rect(app.select.x,app.select.y,pos[0]-app.select.x,pos[1]-app.select.y)
         app.select.w = max(0,app.select.w)
@@ -679,7 +681,7 @@ menus = [
     ('Edit/Paste',cmd_paste,None),
     ('Edit/Delete',cmd_delete,None),
     ('Edit/Fill',cmd_fill,None),
-        ('Edit/Ellipse',cmd_ellipse,None),
+    ('Edit/Ellipse',cmd_ellipse,None),
     ('Edit/Select All',cmd_all,None),
 
     ('Transform/Rotate 90 CCW',cmd_rotate,90),
@@ -920,8 +922,8 @@ def init_app():
     #tdraw-calcs
     dw = app.screen_w - (toolbox_width+app.tiles.get_width()+ss*4)
     dh = app.screen_h - (menus_height+colors_height+ss*2)
-    if dw/float(app.tile_w) > dh/float(app.tile_h): dw = dh/float(app.tile_h)*app.tile_w
-    else: dh = dw/float(app.tile_w)*app.tile_h
+    if dw/app.tile_w > dh/app.tile_h: dw = dh/app.tile_h*app.tile_w
+    else: dh = dw/app.tile_w*app.tile_h
     e = app.tdraw = tdraw(dw,dh)
     app.add(e,x,y)
     x,h = x+e.rect.w,max(h,e.rect.h)

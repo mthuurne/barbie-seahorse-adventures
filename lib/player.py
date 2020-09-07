@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -76,7 +78,7 @@ def event(g, s, e):
                 # print "door!"
                 s.current_door.open = DOOR_DELAY
             s.image = None
-            s.door_pos = s.rect.centerx / TW, s.rect.centery / TH
+            s.door_pos = s.rect.centerx // TW, s.rect.centery // TH
             # tiles.t_put(g,(x,y), 0x32)
             # tiles.t_put(g,(x,y-1), 0x22)
     if e.type is USEREVENT and e.action == 'bubble':
@@ -91,7 +93,7 @@ def event(g, s, e):
         s.god_mode = True
 
     # if e.type is KEYDOWN and e.key == K_F12:
-        # 1/0
+        # 1//0
 
 
 def loop(g, s):
@@ -101,7 +103,7 @@ def loop(g, s):
         s.groups = set()
         if not s.no_explode:
             s.exploded += 1
-            if s.exploded > FPS / 2:
+            if s.exploded > FPS // 2:
                 s.image = None
         else:
             s.image = None
@@ -124,7 +126,7 @@ def loop(g, s):
 
     if s.door_timer is not None:
         if s.door_timer == 0:
-            x, y = s.door_pos  # s.rect.centerx/TW,s.rect.centery/TH
+            x, y = s.door_pos  # s.rect.centerx//TW,s.rect.centery//TH
             import door
             # door.hit(g,g.layer[y][x],s)
             door.hit(g, (x, y), s)
@@ -215,7 +217,7 @@ def loop(g, s):
     if n == CODE_EXIT:
         g.status = 'exit'
     if n == CODE_DOOR_AUTO:
-        x, y = s.rect.centerx / TW, s.rect.centery / TH
+        x, y = s.rect.centerx // TW, s.rect.centery // TH
         import door
         door.hit(g, (x, y), s)
 
@@ -238,11 +240,11 @@ def pan_screen(g, s):
     # adjust the view
     border = pygame.Rect(s.rect)
     # pad = 100
-    pad = (SW / 2) - TW
+    pad = (SW // 2) - TW
     border.x -= pad
     border.w += pad * 2
     # pad = 80
-    pad = (SH / 2) - TH
+    pad = (SH // 2) - TH
     if s.looking:
         pad = TH * 2
     border.y -= pad

@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -27,7 +29,7 @@ def init(g, r, p):
     if p.facing == 'left':
         s.vx = -1
     s.vy = 0
-    s.rect.centerx += s.vx * (6 + s.rect.width / 2)
+    s.rect.centerx += s.vx * (6 + s.rect.width // 2)
     s.rect.centery -= 2
 
     return s

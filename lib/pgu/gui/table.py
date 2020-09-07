@@ -1,5 +1,6 @@
 """
 """
+from __future__ import division
 from __future__ import print_function
 from const import *
 import container
@@ -244,12 +245,12 @@ class Table(container.Container):
             d = (self.style.width - w)
             for n in range(0, len(columnsizes)):
                 v = columnsizes[n]
-                columnsizes[n] += v * d / w
+                columnsizes[n] += v * d // w
         if h > 0 and h < self.style.height and len(rowsizes):
-            d = (self.style.height - h) / len(rowsizes)
+            d = (self.style.height - h) // len(rowsizes)
             for n in range(0, len(rowsizes)):
                 v = rowsizes[n]
-                rowsizes[n] += v * d / h
+                rowsizes[n] += v * d // h
 
         #set the widget's position by calculating their row/column x/y offset
         cellpositions = [[[sum(columnsizes[0:cell]), sum(rowsizes[0:row])] for cell in range(self.getColumns())] for row in range(self.getRows())]
@@ -279,7 +280,7 @@ class Table(container.Container):
 
 
 def _table_div(a,b,c):
-    v,r = a/b, a%b
+    v,r = a//b, a%b
     if r != 0 and (c%b)<r: v += 1
     return v
 
@@ -326,7 +327,7 @@ class _Table_td(container.Container):
 
         dx = width-w.rect.w
         dy = height-w.rect.h
-        w.rect.x = (self.style.align+1)*dx/2
-        w.rect.y = (self.style.valign+1)*dy/2
+        w.rect.x = (self.style.align+1)*dx//2
+        w.rect.y = (self.style.valign+1)*dy//2
 
         return width,height

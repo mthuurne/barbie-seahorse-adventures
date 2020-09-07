@@ -1,5 +1,6 @@
 """
 """
+from __future__ import division
 from __future__ import print_function
 import pygame
 from pygame.locals import *
@@ -304,8 +305,8 @@ class Container(widget.Widget):
 
         if x == None or y == None: #auto center the window
             #w.style.x,w.style.y = 0,0
-            w.rect.x = (self.rect.w-w.rect.w)/2
-            w.rect.y = (self.rect.h-w.rect.h)/2
+            w.rect.x = (self.rect.w-w.rect.w)//2
+            w.rect.y = (self.rect.h-w.rect.h)//2
             #w.resize()
             #w._resize(self.rect.w,self.rect.h)
         else: #show it where we want it

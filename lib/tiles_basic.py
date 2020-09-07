@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 
 from cnst import *
@@ -65,7 +67,7 @@ def hit_fally(g, a, b, top=1, right=1, bottom=1, left=1):
     tile.tile_to_sprite(g, a)
 
     s = a
-    s.timer = FPS / 4
+    s.timer = FPS // 4
     s.image = s.image + 1
     s.hit = hit_block
     s.vy = 0
@@ -82,7 +84,7 @@ def hit_fally(g, a, b, top=1, right=1, bottom=1, left=1):
 
 
 def fally_init(g, r, n, *params):
-    x, y = r.centerx / TW, r.centery / TH
+    x, y = r.centerx // TW, r.centery // TH
     tiles.t_put(g, (x, y), 0x12)
 
 

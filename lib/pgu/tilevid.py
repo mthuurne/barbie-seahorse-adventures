@@ -1,5 +1,7 @@
 """Square tile based engine."""
 
+from __future__ import division
+
 from pgu.vid import *
 import pygame
 
@@ -23,19 +25,19 @@ class Tilevid(Vid):
 
         blit = s.blit
         yy = - (self.view.y%th)
-        my = (oy+sh)/th
+        my = (oy+sh)//th
         if (oy+sh)%th: my += 1
 
         if blayer != None:
-            for y in range(oy/th,my):
+            for y in range(oy//th,my):
                 if y >=0 and y < h:
                     trow = tlayer[y]
                     brow = blayer[y]
                     arow = alayer[y]
                     xx= - (self.view.x%tw)
-                    mx = (ox+sw)/tw
+                    mx = (ox+sw)//tw
                     #if (ox+sh)%tw: mx += 1
-                    for x in range(ox/tw,mx+1):
+                    for x in range(ox//tw,mx+1):
                         if x >=0and x<w:
                             blit(tiles[brow[x]].image,(xx,yy))
                             blit(tiles[trow[x]].image,(xx,yy))
@@ -43,14 +45,14 @@ class Tilevid(Vid):
                         xx += tw
                 yy+=th
         else:
-            for y in range(oy/th,my):
+            for y in range(oy//th,my):
                 if y >=0 and y<h:
                     trow = tlayer[y]
                     arow = alayer[y]
                     xx= - (self.view.x%tw)
-                    mx = (ox+sw)/tw
+                    mx = (ox+sw)//tw
                     #if (ox+sh)%tw: mx += 1
-                    for x in range(ox/tw,mx+1):
+                    for x in range(ox//tw,mx+1):
                         if x >=0 and x<w:
                             blit(tiles[trow[x]].image,(xx,yy))
                             arow[x]=0
@@ -105,11 +107,11 @@ class Tilevid(Vid):
                  s.updated = 1
             if s.updated:
                 r = s._irect
-                y = max(0,r.y/th)
-                yy = min(h,r.bottom/th+1)
+                y = max(0,r.y//th)
+                yy = min(h,r.bottom//th+1)
                 while y < yy:
-                    x = max(0,r.x/tw)
-                    xx = min(w,r.right/tw+1)
+                    x = max(0,r.x//tw)
+                    xx = min(w,r.right//tw+1)
                     while x < xx:
                         if alayer[y][x] == 0:
                             self.updates.append((x,y))
@@ -118,11 +120,11 @@ class Tilevid(Vid):
                     y += 1
 
                 r = s.irect
-                y = max(0,r.y/th)
-                yy = min(h,r.bottom/th+1)
+                y = max(0,r.y//th)
+                yy = min(h,r.bottom//th+1)
                 while y < yy:
-                    x = r.x/tw
-                    xx = min(w,r.right/tw+1)
+                    x = r.x//tw
+                    xx = min(w,r.right//tw+1)
                     while x < xx:
                         if alayer[y][x]==0:
                             alayer[y][x]=2
@@ -136,11 +138,11 @@ class Tilevid(Vid):
         for s in sprites:
             if s.updated==0:
                 r = s.irect
-                y = max(0,r.y/th)
-                yy = min(h,r.bottom/th+1)
+                y = max(0,r.y//th)
+                yy = min(h,r.bottom//th+1)
                 while y < yy:
-                    x = max(0,r.x/tw)
-                    xx = min(w,r.right/tw+1)
+                    x = max(0,r.x//tw)
+                    xx = min(w,r.right//tw+1)
                     while x < xx:
                         if alayer[y][x]==1:
                             s.updated=1
@@ -171,7 +173,7 @@ class Tilevid(Vid):
         x,y = pos
         tiles = self.tiles
         tw,th = tiles[0].image.get_width(),tiles[0].image.get_height()
-        return x/tw,y/th
+        return x//tw,y//th
 
     def tile_to_view(self,pos):
         x,y = pos

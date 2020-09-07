@@ -1,3 +1,4 @@
+from __future__ import division
 from __future__ import print_function
 import pygame
 from pygame.locals import *
@@ -44,7 +45,7 @@ pygame.display.set_mode((80,80),32)
 def prep(name):
     fname = name+".png"
     img = pygame.image.load(fname)
-    w,h = img.get_width()/2,img.get_height()/2
+    w,h = img.get_width()//2,img.get_height()//2
 
     out = pygame.Surface((w*3,h*3),SWSURFACE|SRCALPHA,32)
     out.fill((0,0,0,0))
@@ -122,7 +123,7 @@ for fname,img,over,ww,hh,s in todo:
     for y in range(0,hh):
         for x in range(0,ww):
             c = int(s[n])
-            xx,yy = (c-1)%3,2-(c-1)/3
+            xx,yy = (c-1)%3,2-(c-1)//3
             out.blit(img.subsurface((xx*w,yy*h,w,h)),(x*w,y*h))
             n += 1
     if over != None:

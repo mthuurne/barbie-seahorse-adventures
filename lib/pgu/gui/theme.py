@@ -1,5 +1,7 @@
 """
 """
+from __future__ import division
+
 import os, re
 import pygame
 
@@ -246,10 +248,10 @@ class Theme:
             #align it within it's zone of power.
             dx = width-rect.w
             dy = height-rect.h
-            #rect.x += (1)*dx/2
-            #rect.y += (1)*dy/2
-            rect.x += (w.style.align+1)*dx/2
-            rect.y += (w.style.valign+1)*dy/2
+            #rect.x += (1)*dx//2
+            #rect.y += (1)*dy//2
+            rect.x += (w.style.align+1)*dx//2
+            rect.y += (w.style.valign+1)*dy//2
 
 
             #print w,ow, w._rect_margin.w,  ttw
@@ -401,7 +403,7 @@ class Theme:
             return
 
         x,y,w,h=r.x,r.y,r.w,r.h
-        ww,hh=box.get_width()/3,box.get_height()/3
+        ww,hh=box.get_width()//3,box.get_height()//3
         xx,yy=x+w,y+h
         src = pygame.rect.Rect(0,0,ww,hh)
         dest = pygame.rect.Rect(0,0,ww,hh)

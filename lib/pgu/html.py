@@ -1,5 +1,6 @@
 """a html renderer
 """
+from __future__ import division
 from __future__ import print_function
 import htmllib
 import re
@@ -374,7 +375,7 @@ class _html(htmllib.HTMLParser):
     def start_hr(self,attrs):
         self.do_hr(attrs)
     def do_hr(self,attrs):
-        h = self.font.size(" ")[1]/2
+        h = self.font.size(" ")[1]//2
 
         r = self.attrs_to_map(attrs)
         params = self.map_to_params(r)

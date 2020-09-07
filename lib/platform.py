@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -8,7 +10,7 @@ import sprite
 
 def init(g, r, n, vx, vy):
 
-    x, y = r.centerx / TW, r.centery / TH
+    x, y = r.centerx // TW, r.centery // TH
     code = g.codes_data[y][x]
     min_x = x
     max_x = x

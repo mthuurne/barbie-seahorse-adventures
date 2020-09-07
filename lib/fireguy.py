@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -75,7 +77,7 @@ def loop(g, s):
     else:
         s.idling = 240
 
-    s.image = 'fireguy-%s-%s' % (s.facing, (s.frame / 5) % 2)
+    s.image = 'fireguy-%s-%s' % (s.facing, (s.frame // 5) % 2)
     s.frame += 1
 
 

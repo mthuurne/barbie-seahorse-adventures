@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -51,7 +53,7 @@ def loop(g, s):
         s.facing = 'right'
     elif s.vx < 0:
         s.facing = 'left'
-    s.image = 'brobo-%s-%s' % (s.facing, (g.frame / 10) % 2)
+    s.image = 'brobo-%s-%s' % (s.facing, (g.frame // 10) % 2)
 
     # if s.shoot == 0:
     #    shot = laser.init(g,s.rect,s)

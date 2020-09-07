@@ -65,6 +65,7 @@ return - toggle fullscreen
 </pre>
 """
 
+from __future__ import division
 from __future__ import print_function
 import os,sys
 from optparse import OptionParser
@@ -197,8 +198,8 @@ class _app(gui.Container):
 
     def view_init(self,dw,dh):
 
-        self.view_w = dw #/ self.tile_w
-        self.view_h = dh #/ self.tile_h
+        self.view_w = dw #// self.tile_w
+        self.view_h = dh #// self.tile_h
 
         if 'view_w' in cfg and cfg['view_w'] != 0:
             self.view_w = min(self.view_w, cfg['view_w'])
@@ -318,7 +319,7 @@ def hex_image(self):
     if not hasattr(self,'tiles_w'): self.tiles_w = 256
     if not hasattr(self,'tiles_h'): self.tiles_h = 256
     rimg = pygame.Surface((self.tiles_w,self.tiles_h), pygame.SRCALPHA)
-    w,h = self.tiles_w / self.tile_w, self.tiles_h / self.tile_h
+    w,h = self.tiles_w // self.tile_w, self.tiles_h // self.tile_h
     n = 0
     fnt = pygame.font.SysFont("helvetica",self.tile_h-1)
     for y in range(0,h):
@@ -344,15 +345,15 @@ class tpicker(gui.Widget):
     def paint(self,s):
         s.fill((128,128,128))
         s.blit(app.tiles,(0,0))
-        w = app.tiles_w/app.tile_w
-        x,y = app.tile%w,app.tile/w
+        w = app.tiles_w//app.tile_w
+        x,y = app.tile%w,app.tile//w
         off = x*app.tile_w,y*app.tile_h
         pygame.draw.rect(s,(255,255,255),(off[0],off[1],app.tile_w,app.tile_h),2)
 
     def event(self,e):
         if (e.type is MOUSEBUTTONDOWN and e.button == 1) or (e.type is MOUSEMOTION and e.buttons[0] == 1 and self.container.myfocus == self):
-            w = app.tiles_w/app.tile_w
-            x,y = e.pos[0]/app.tile_w,e.pos[1]/app.tile_h
+            w = app.tiles_w//app.tile_w
+            x,y = e.pos[0]//app.tile_w,e.pos[1]//app.tile_h
             n = x+y*w
             self.set(n)
             if app.mode not in ('tile','bkgr'):
@@ -372,15 +373,15 @@ class cpicker(gui.Widget):
     def paint(self,s):
         s.fill((128,128,128))
         s.blit(app.codes,(0,0))
-        w = app.codes_w/app.tile_w
-        x,y = app.code%w,app.code/w
+        w = app.codes_w//app.tile_w
+        x,y = app.code%w,app.code//w
         off = x*app.tile_w,y*app.tile_h
         pygame.draw.rect(s,(255,255,255),(off[0],off[1],app.tile_w,app.tile_h),2)
 
     def event(self,e):
         if (e.type is MOUSEBUTTONDOWN and e.button == 1) or (e.type is MOUSEMOTION and e.buttons[0] == 1 and self.container.myfocus == self):
-            w = app.codes_w/app.tile_w
-            x,y = e.pos[0]/app.tile_w,e.pos[1]/app.tile_h
+            w = app.codes_w//app.tile_w
+            x,y = e.pos[0]//app.tile_w,e.pos[1]//app.tile_h
             n = x+y*w
             self.set(n)
             app.tools['code'].click()
@@ -411,10 +412,10 @@ class vwrap(gui.Table):
         for x,y in corners:
             minx,miny,maxx,maxy = min(minx,x),min(miny,y),max(maxx,x),max(maxy,y)
 
-        minx -= w/2
-        maxx -= w/2
-        miny -= h/2
-        maxy -= h/2
+        minx -= w//2
+        maxx -= w//2
+        miny -= h//2
+        maxy -= h//2
 
         self.vs = e = gui.VSlider(0,miny,maxy,sw*4,width=sw,height=h-sw)
         self.add(e,1,0)
@@ -455,16 +456,16 @@ class vdraw(gui.Widget):
         s = pygame.Surface((self.rect.w,self.rect.h))
         clrs = [(148,148,148),(108,108,108)]
         inc = 7
-        for y in range(0,self.rect.w/inc):
-            for x in range(0,self.rect.h/inc):
+        for y in range(0,self.rect.w//inc):
+            for x in range(0,self.rect.h//inc):
                 s.fill(clrs[(x+y)%2],(x*inc,y*inc,inc,inc))
         self.bg = s
 
         s = pygame.Surface((self.rect.w,self.rect.h), pygame.SRCALPHA)
         for x in range(0,app.view_w):
-            pygame.draw.line(s,(0,0,0),(self.rect.w*x/app.view_w,0),(self.rect.w*x/app.view_w,self.rect.h))
+            pygame.draw.line(s,(0,0,0),(self.rect.w*x//app.view_w,0),(self.rect.w*x//app.view_w,self.rect.h))
         for y in range(0,app.view_h):
-            pygame.draw.line(s,(0,0,0),(0,self.rect.h*y/app.view_h),(self.rect.w,self.rect.h*y/app.view_h))
+            pygame.draw.line(s,(0,0,0),(0,self.rect.h*y//app.view_h),(self.rect.w,self.rect.h*y//app.view_h))
         self.grid = s
 
         self.pos = 0,0
@@ -488,7 +489,7 @@ class vdraw(gui.Widget):
 
 
         #s.fill((0,0,0))
-        #0/0
+        #0//0
         app.level.paint(s)
 
         tmp_tiles = app.level.tiles
@@ -520,7 +521,7 @@ class vdraw(gui.Widget):
 
         #s.blit(self.grid,(0,0))
         #r = app.select
-        #pygame.draw.rect(s,(255,255,255,128),Rect(r.x*self.rect.w/app.view_w,r.y*self.rect.h/app.view_h,r.w*self.rect.w/app.view_w,r.h*self.rect.h/app.view_h),4)
+        #pygame.draw.rect(s,(255,255,255,128),Rect(r.x*self.rect.w//app.view_w,r.y*self.rect.h//app.view_h,r.w*self.rect.w//app.view_w,r.h*self.rect.h//app.view_h),4)
 
     def event(self,e):
         if e.type is MOUSEMOTION:
@@ -646,7 +647,7 @@ class vdraw(gui.Widget):
             self.repaint()
         return tx,ty
 
-        x,y = e.pos[0]/app.tile_w,e.pos[1]/app.tile_h
+        x,y = e.pos[0]//app.tile_w,e.pos[1]//app.tile_h
         x = min(max(0,x),app.view_w-1)
         y = min(max(0,y),app.view_h-1)
         return x,y
@@ -658,7 +659,7 @@ class vdraw(gui.Widget):
 
         w = app.tile_w
         h = app.tile_h
-        x,y = (e.pos[0]+w/2)/app.tile_w,(e.pos[1]+h/2)/app.tile_h
+        x,y = (e.pos[0]+w//2)//app.tile_w,(e.pos[1]+h//2)//app.tile_h
         x = min(max(0,x),app.view_w)
         y = min(max(0,y),app.view_h)
         return x,y
@@ -858,8 +859,8 @@ def cmd_pick(value):
 
 
     if (mods&KMOD_SHIFT) != 0:
-        app.level.view.x += dx*app.vdraw.rect.w/8
-        app.level.view.y += dy*app.vdraw.rect.h/8
+        app.level.view.x += dx*app.vdraw.rect.w//8
+        app.level.view.y += dy*app.vdraw.rect.h//8
         app.vdraw.repaint()
         #x,y = app.view.get_offset()
         #x = x + 1*dx
@@ -881,7 +882,7 @@ def cmd_pick(value):
 
 
     else:
-        w = app.tiles_w/app.tile_w
+        w = app.tiles_w//app.tile_w
         if app.mode == 'code':
             n = app.code + dx + dy*w
             app.cpicker.set(n)

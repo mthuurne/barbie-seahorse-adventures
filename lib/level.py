@@ -1,5 +1,6 @@
 # this file is licensed under the LGPL
 
+from __future__ import division
 from __future__ import print_function
 import os
 
@@ -30,8 +31,8 @@ def load_level(fname):
 
 def load_tiles(fname):
     img = pygame.image.load(fname).convert_alpha()
-    w, h = img.get_width() / TW, img.get_height() / TH
-    return [img.subsurface((n % w) * TW, (n / w) * TH, TW, TH) for n in range(w * h)]
+    w, h = img.get_width() // TW, img.get_height() // TH
+    return [img.subsurface((n % w) * TW, (n // w) * TH, TW, TH) for n in range(w * h)]
 
 
 def load_images(dname):
@@ -167,8 +168,8 @@ class Level:
         self.bkgr = pygame.image.load(data.filepath(os.path.join('bkgr', fname))).convert()
 
     def run_codes(self, r):
-        rw = range(max(r.left / TW, 0), min(r.right / TW, self.size[0]))
-        rh = range(max(r.top / TH, 0), min(r.bottom / TH, self.size[1]))
+        rw = range(max(r.left // TW, 0), min(r.right // TW, self.size[0]))
+        rh = range(max(r.top // TH, 0), min(r.bottom // TH, self.size[1]))
         for y in rh:
             row = self.codes_data[y]
             for x in rw:
@@ -196,11 +197,11 @@ class Level:
         # screen.fill((0,0,0))
 
         v = self.view
-        dh = (screen.get_height() - v.h) / 2
+        dh = (screen.get_height() - v.h) // 2
         if dh:
             screen.fill((0, 0, 0), (0, 0, SW, dh))
             screen.fill((0, 0, 0), (0, SH - dh, SW, dh))
-        dw = (screen.get_width() - v.w) / 2
+        dw = (screen.get_width() - v.w) // 2
         if dw:
             screen.fill((0, 0, 0), (0, 0, dw, SH))
             screen.fill((0, 0, 0), (SW - dw, 0, dw, SH))
@@ -211,11 +212,11 @@ class Level:
         r = pygame.Rect(0, 0, bg.get_width(), bg.get_height())
         if r.w > self.bounds.w:
             d = r.w - self.bounds.w
-            r.x = d / 2
+            r.x = d // 2
             r.w -= d
         if r.h > self.bounds.h:
             d = r.h - self.bounds.h
-            r.y = d / 2
+            r.y = d // 2
             r.h -= d
         # that picked out the center of the surface ...
         # DrPetter likes the top ...
@@ -225,11 +226,11 @@ class Level:
 
         vw = bg.get_width() - self.view.w
         bw = max(1, self.bounds.w - self.view.w)
-        x = vw * (self.view.x - self.bounds.x) / bw
+        x = vw * (self.view.x - self.bounds.x) // bw
 
         vw = bg.get_height() - self.view.h
         bw = max(1, self.bounds.h - self.view.h)
-        y = vw * (self.view.y - self.bounds.y) / bw
+        y = vw * (self.view.y - self.bounds.y) // bw
 
         dx, dy = -x, -y
 
@@ -254,9 +255,9 @@ class Level:
         rw = range(v.left - v.left % TW, v.right, TW)
         rh = range(v.top - v.top % TH, v.bottom, TH)
         for y in rh:
-            row = self.drawfg[y / TH]
+            row = self.drawfg[y // TH]
             for x in rw:
-                s = row[x / TW]
+                s = row[x // TW]
                 if s != 0:
                     screen.blit(tiles[s], (x - v.left, y - v.top))
 
@@ -269,7 +270,7 @@ class Level:
                 screen.blit(img, (s.rect.x - s.shape.x - v.x, s.rect.y - s.shape.y - v.y))
             else:
                 w = img.get_width()
-                top = s.rect.y - s.shape.y - v.y - img.get_height() / 2 * s.exploded
+                top = s.rect.y - s.shape.y - v.y - img.get_height() // 2 * s.exploded
                 for ty in range(img.get_height()):
                     screen.blit(img, (s.rect.x - s.shape.x - v.x, top + ty * (1 + s.exploded)), (0, ty, w, 1))
 
@@ -328,9 +329,9 @@ class Level:
                     rw = range(max(r.left - r.left % TW, 0), min(r.right, self.size[0] * TW), TW)
                     rh = range(max(r.top - r.top % TH, 0), min(r.bottom, self.size[1] * TH), TH)
                     for y in rh:
-                        row = self.layer[y / TH]
+                        row = self.layer[y // TH]
                         for x in rw:
-                            t = row[x / TW]
+                            t = row[x // TW]
                             if t is not None and t.hit_groups.intersection(s.groups):
                                 dist = abs(t.rect.centerx - s.rect.centerx) + abs(t.rect.centery - s.rect.centery)
                                 hits.append([dist, t])
@@ -455,13 +456,13 @@ class Level:
         textheight = img.get_height()
 
         img = self._tiles[0x28]  # The coin
-        x, y = x - img.get_width() - pad, y - img.get_height() / 2 + textheight / 2
+        x, y = x - img.get_width() - pad, y - img.get_height() // 2 + textheight // 2
         blit(img, (x, y))
 
         text = self.title
         c = (0, 0, 0)
         img = fnt.render(text, 1, c)
-        x, y = (SW - img.get_width()) / 2, top_y
+        x, y = (SW - img.get_width()) // 2, top_y
         # blit(img,(x-1,y)); blit(img,(x+1,y)) ; blit(img,(x,y-1)); blit(img,(x-1,y+1))
         blit(img, (x + 1, y + 1))
         c = (255, 255, 255)

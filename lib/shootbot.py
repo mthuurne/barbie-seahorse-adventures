@@ -1,3 +1,5 @@
+from __future__ import division
+
 import pygame
 from pygame.locals import *
 
@@ -54,7 +56,7 @@ def loop(g, s):
         s.facing = 'right'
     elif s.vx < 0.0:
         s.facing = 'left'
-    s.image = 'shootbot-%s-%s' % (s.facing, (g.frame / 10) % 4)
+    s.image = 'shootbot-%s-%s' % (s.facing, (g.frame // 10) % 4)
 
     if sprite.get_code(g, s, sign(s.vx), 0) == CODE_SHOOTBOT_TURN:
         s.vx = 0.0

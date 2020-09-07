@@ -126,7 +126,7 @@ class Game(engine.Game):
         try:
 
             if '-nosound' in sys.argv:
-                1 / 0
+                raise ValueError("Sound disabled using -nosound option")
 
             # stop crackling sound on some windows XP machines.
             if os.name == 'posix' or 1:
